@@ -12,6 +12,7 @@
 // Also the strapi-generate-plugins/files/admin/src/index.js needs to be updated
 // IF THE DOC IS NOT UPDATED THE PULL REQUEST WILL NOT BE MERGED
 
+/* eslint-disable */
 
 import '@babel/polyfill';
 import 'sanitize.css/sanitize.css';
