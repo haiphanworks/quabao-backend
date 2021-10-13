@@ -1,0 +1,61 @@
+{
+  "kind": "collectionType",
+  "collectionName": "entries",
+  "info": {
+    "name": "entry",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "unique": true
+    },
+    "image": {
+      "type": "component",
+      "repeatable": false,
+      "component": "single.image"
+    },
+    "slug": {
+      "type": "uid"
+    },
+    "toi": {
+      "type": "string"
+    },
+    "phat": {
+      "type": "string"
+    },
+    "authorName": {
+      "type": "string"
+    },
+    "authorBiography": {
+      "type": "text"
+    },
+    "authorBirthyear": {
+      "type": "integer"
+    },
+    "authorEmail": {
+      "type": "email"
+    },
+    "authorInstagram": {
+      "type": "string"
+    },
+    "authorFacebook": {
+      "type": "string"
+    },
+    "authorPhone": {
+      "type": "integer"
+    },
+    "votes": {
+      "plugin": "users-permissions",
+      "collection": "user",
+      "via": "voted",
+      "dominant": true
+    }
+  }
+}

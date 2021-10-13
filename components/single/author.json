@@ -1,0 +1,44 @@
+{
+  "collectionName": "components_single_authors",
+  "info": {
+    "name": "author",
+    "icon": "user",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "biography": {
+      "type": "text"
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "instagram": {
+      "type": "string"
+    },
+    "birthyear": {
+      "type": "integer",
+      "min": 1921,
+      "max": 2021
+    },
+    "phone": {
+      "type": "integer"
+    },
+    "facebook": {
+      "type": "string"
+    }
+  }
+}
