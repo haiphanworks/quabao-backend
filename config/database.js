@@ -10,8 +10,13 @@ module.exports = ({ env }) => ({
 				database: env('DATABASE_NAME', 'quabao'),
 				username: env('DATABASE_USERNAME', 'quabao'),
 				password: env('DATABASE_PASSWORD', 'M4tkh4uqu4b40!!!@@@'),
+				ssl: {
+					rejectUnauthorized: env.bool('DATABASE_SSL_SELF', false), // For self-signed certificates
+				},
 			},
-			options: {},
+			options: {
+				ssl: false,
+			},
 		},
 	},
 })
