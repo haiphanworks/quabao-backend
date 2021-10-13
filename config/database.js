@@ -12,15 +12,11 @@ module.exports = ({ env }) => ({
 				password: env('DATABASE_PASSWORD', 'M4tkh4uqu4b40!!!@@@'),
 				ssl: {
 					rejectUnauthorized: env.bool('DATABASE_SSL_SELF', false), // For self-signed certificates
-				  },
-				},
-				options: {
-				  ssl: env.bool('DATABASE_SSL', false),
 				},
 			},
-			options: {},
+			options: {
+				ssl: env.bool('DATABASE_SSL', false),
+			},
 		},
 	},
 })
-
-
