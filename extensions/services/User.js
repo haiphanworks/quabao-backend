@@ -6,8 +6,6 @@ module.exports = {
 	 * @return {Promise}
 	 */
 	fetchAuthenticatedUser(id) {
-		return strapi
-			.query('user', 'users-permissions')
-			.findOne({ id }, ['role', 'voted', 'voted.length', 'ticket', 'ticket.slug']) // added restaurants
+		return strapi.query('user', 'users-permissions').findOne({ id }, ['ticket', 'voted']) // added restaurants
 	},
 }
