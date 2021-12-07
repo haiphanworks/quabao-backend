@@ -39,6 +39,10 @@
     },
     "description": {
       "type": "richtext"
+    },
+    "order": {
+      "via": "ticket",
+      "model": "order"
     }
   }
 }

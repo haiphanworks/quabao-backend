@@ -66,6 +66,10 @@
     "voted": {
       "via": "votes",
       "collection": "entry"
+    },
+    "order": {
+      "via": "user",
+      "model": "order"
     }
   }
 }
