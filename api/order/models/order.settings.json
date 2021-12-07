@@ -21,8 +21,8 @@
       "type": "integer"
     },
     "ticket": {
-      "model": "ticket",
-      "via": "order"
+      "via": "order",
+      "model": "ticket"
     },
     "paid": {
       "type": "boolean",

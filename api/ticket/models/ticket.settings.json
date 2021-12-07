@@ -43,6 +43,14 @@
     "order": {
       "via": "ticket",
       "model": "order"
+    },
+    "session": {
+      "type": "enumeration",
+      "enum": [
+        "day",
+        "night",
+        "vip"
+      ]
     }
   }
 }
