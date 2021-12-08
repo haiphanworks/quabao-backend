@@ -51,6 +51,9 @@
         "night",
         "vip"
       ]
+    },
+    "price_old": {
+      "type": "integer"
     }
   }
 }
