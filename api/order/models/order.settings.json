@@ -27,6 +27,12 @@
     "paid": {
       "type": "boolean",
       "default": false
+    },
+    "name": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
     }
   }
 }
