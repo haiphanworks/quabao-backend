@@ -21,7 +21,7 @@
       "type": "integer"
     },
     "ticket": {
-      "via": "order",
+      "via": "orders",
       "model": "ticket"
     },
     "paid": {

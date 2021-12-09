@@ -40,10 +40,6 @@
     "description": {
       "type": "richtext"
     },
-    "order": {
-      "via": "ticket",
-      "model": "order"
-    },
     "session": {
       "type": "enumeration",
       "enum": [
@@ -54,6 +50,10 @@
     },
     "price_old": {
       "type": "integer"
+    },
+    "orders": {
+      "via": "ticket",
+      "collection": "order"
     }
   }
 }
