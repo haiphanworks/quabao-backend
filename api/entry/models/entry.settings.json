@@ -52,9 +52,9 @@
       "type": "integer"
     },
     "votes": {
+      "via": "voted",
       "plugin": "users-permissions",
       "collection": "user",
-      "via": "voted",
       "dominant": true
     }
   }

@@ -70,6 +70,12 @@
     "orders": {
       "via": "user",
       "collection": "order"
+    },
+    "name": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
     }
   }
 }
