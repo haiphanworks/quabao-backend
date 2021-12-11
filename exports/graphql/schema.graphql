@@ -697,7 +697,7 @@ type deleteSlotPayload {
 enum ENUM_TICKET_SESSION {
   day
   night
-  vip
+  sleep
 }
 
 type Ticket {
@@ -707,10 +707,11 @@ type Ticket {
   title: String
   slug: String
   price: Int
-  image: UploadFile
   description: String
   session: ENUM_TICKET_SESSION
   price_old: Int
+  display: String
+  subtitle: String
   published_at: DateTime
   users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser]
   orders(sort: String, limit: Int, start: Int, where: JSON): [Order]
@@ -758,10 +759,11 @@ type TicketGroupBy {
   title: [TicketConnectionTitle]
   slug: [TicketConnectionSlug]
   price: [TicketConnectionPrice]
-  image: [TicketConnectionImage]
   description: [TicketConnectionDescription]
   session: [TicketConnectionSession]
   price_old: [TicketConnectionPrice_old]
+  display: [TicketConnectionDisplay]
+  subtitle: [TicketConnectionSubtitle]
   published_at: [TicketConnectionPublished_at]
 }
 
@@ -795,11 +797,6 @@ type TicketConnectionPrice {
   connection: TicketConnection
 }
 
-type TicketConnectionImage {
-  key: ID
-  connection: TicketConnection
-}
-
 type TicketConnectionDescription {
   key: String
   connection: TicketConnection
@@ -815,6 +812,16 @@ type TicketConnectionPrice_old {
   connection: TicketConnection
 }
 
+type TicketConnectionDisplay {
+  key: String
+  connection: TicketConnection
+}
+
+type TicketConnectionSubtitle {
+  key: String
+  connection: TicketConnection
+}
+
 type TicketConnectionPublished_at {
   key: DateTime
   connection: TicketConnection
@@ -825,11 +832,12 @@ input TicketInput {
   slug: String
   price: Int
   users: [ID]
-  image: ID
   description: String
   session: ENUM_TICKET_SESSION
   price_old: Int
   orders: [ID]
+  display: String
+  subtitle: String
   published_at: DateTime
   created_by: ID
   updated_by: ID
@@ -840,11 +848,12 @@ input editTicketInput {
   slug: String
   price: Int
   users: [ID]
-  image: ID
   description: String
   session: ENUM_TICKET_SESSION
   price_old: Int
   orders: [ID]
+  display: String
+  subtitle: String
   published_at: DateTime
   created_by: ID
   updated_by: ID
@@ -1430,7 +1439,7 @@ input editComponentSingleImageInput {
   green: ID
 }
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | About | updateAboutPayload | deleteAboutPayload | Entry | EntryConnection | EntryAggregator | EntryAggregatorSum | EntryAggregatorAvg | EntryAggregatorMin | EntryAggregatorMax | EntryGroupBy | EntryConnectionId | EntryConnectionCreated_at | EntryConnectionUpdated_at | EntryConnectionTitle | EntryConnectionImage | EntryConnectionSlug | EntryConnectionToi | EntryConnectionPhat | EntryConnectionAuthorName | EntryConnectionAuthorBiography | EntryConnectionAuthorBirthyear | EntryConnectionAuthorEmail | EntryConnectionAuthorInstagram | EntryConnectionAuthorFacebook | EntryConnectionAuthorPhone | EntryConnectionPublished_at | createEntryPayload | updateEntryPayload | deleteEntryPayload | Global | updateGlobalPayload | deleteGlobalPayload | Order | OrderConnection | OrderAggregator | OrderAggregatorSum | OrderAggregatorAvg | OrderAggregatorMin | OrderAggregatorMax | OrderGroupBy | OrderConnectionId | OrderConnectionCreated_at | OrderConnectionUpdated_at | OrderConnectionUser | OrderConnectionAmount | OrderConnectionTicket | OrderConnectionPaid | OrderConnectionName | OrderConnectionPhone | OrderConnectionDate | OrderConnectionTime | OrderConnectionSession | OrderConnectionSpent | OrderConnectionCheckin | OrderConnectionPublished_at | createOrderPayload | updateOrderPayload | deleteOrderPayload | Slot | SlotConnection | SlotAggregator | SlotGroupBy | SlotConnectionId | SlotConnectionCreated_at | SlotConnectionUpdated_at | SlotConnectionTitle | SlotConnectionDate | SlotConnectionSession | SlotConnectionTimeslot | SlotConnectionPublished_at | createSlotPayload | updateSlotPayload | deleteSlotPayload | Ticket | TicketConnection | TicketAggregator | TicketAggregatorSum | TicketAggregatorAvg | TicketAggregatorMin | TicketAggregatorMax | TicketGroupBy | TicketConnectionId | TicketConnectionCreated_at | TicketConnectionUpdated_at | TicketConnectionTitle | TicketConnectionSlug | TicketConnectionPrice | TicketConnectionImage | TicketConnectionDescription | TicketConnectionSession | TicketConnectionPrice_old | TicketConnectionPublished_at | createTicketPayload | updateTicketPayload | deleteTicketPayload | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionTicket | UsersPermissionsUserConnectionName | UsersPermissionsUserConnectionPhone | createUserPayload | updateUserPayload | deleteUserPayload | ComponentSingleAuthor | ComponentSingleImage
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | About | updateAboutPayload | deleteAboutPayload | Entry | EntryConnection | EntryAggregator | EntryAggregatorSum | EntryAggregatorAvg | EntryAggregatorMin | EntryAggregatorMax | EntryGroupBy | EntryConnectionId | EntryConnectionCreated_at | EntryConnectionUpdated_at | EntryConnectionTitle | EntryConnectionImage | EntryConnectionSlug | EntryConnectionToi | EntryConnectionPhat | EntryConnectionAuthorName | EntryConnectionAuthorBiography | EntryConnectionAuthorBirthyear | EntryConnectionAuthorEmail | EntryConnectionAuthorInstagram | EntryConnectionAuthorFacebook | EntryConnectionAuthorPhone | EntryConnectionPublished_at | createEntryPayload | updateEntryPayload | deleteEntryPayload | Global | updateGlobalPayload | deleteGlobalPayload | Order | OrderConnection | OrderAggregator | OrderAggregatorSum | OrderAggregatorAvg | OrderAggregatorMin | OrderAggregatorMax | OrderGroupBy | OrderConnectionId | OrderConnectionCreated_at | OrderConnectionUpdated_at | OrderConnectionUser | OrderConnectionAmount | OrderConnectionTicket | OrderConnectionPaid | OrderConnectionName | OrderConnectionPhone | OrderConnectionDate | OrderConnectionTime | OrderConnectionSession | OrderConnectionSpent | OrderConnectionCheckin | OrderConnectionPublished_at | createOrderPayload | updateOrderPayload | deleteOrderPayload | Slot | SlotConnection | SlotAggregator | SlotGroupBy | SlotConnectionId | SlotConnectionCreated_at | SlotConnectionUpdated_at | SlotConnectionTitle | SlotConnectionDate | SlotConnectionSession | SlotConnectionTimeslot | SlotConnectionPublished_at | createSlotPayload | updateSlotPayload | deleteSlotPayload | Ticket | TicketConnection | TicketAggregator | TicketAggregatorSum | TicketAggregatorAvg | TicketAggregatorMin | TicketAggregatorMax | TicketGroupBy | TicketConnectionId | TicketConnectionCreated_at | TicketConnectionUpdated_at | TicketConnectionTitle | TicketConnectionSlug | TicketConnectionPrice | TicketConnectionDescription | TicketConnectionSession | TicketConnectionPrice_old | TicketConnectionDisplay | TicketConnectionSubtitle | TicketConnectionPublished_at | createTicketPayload | updateTicketPayload | deleteTicketPayload | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionTicket | UsersPermissionsUserConnectionName | UsersPermissionsUserConnectionPhone | createUserPayload | updateUserPayload | deleteUserPayload | ComponentSingleAuthor | ComponentSingleImage
 
 input InputID {
   id: ID!

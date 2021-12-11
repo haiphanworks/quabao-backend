@@ -27,16 +27,6 @@
       "plugin": "users-permissions",
       "collection": "user"
     },
-    "image": {
-      "model": "file",
-      "via": "related",
-      "allowedTypes": [
-        "images"
-      ],
-      "plugin": "upload",
-      "required": false,
-      "pluginOptions": {}
-    },
     "description": {
       "type": "richtext"
     },
@@ -45,7 +35,7 @@
       "enum": [
         "day",
         "night",
-        "vip"
+        "sleep"
       ]
     },
     "price_old": {
@@ -54,6 +44,12 @@
     "orders": {
       "via": "ticket",
       "collection": "order"
+    },
+    "display": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "string"
     }
   }
 }
