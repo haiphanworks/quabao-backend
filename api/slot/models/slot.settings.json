@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "slots",
+  "info": {
+    "name": "slot"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "date": {
+      "type": "date"
+    },
+    "session": {
+      "type": "enumeration",
+      "enum": [
+        "day",
+        "night"
+      ]
+    },
+    "timeslot": {
+      "type": "enumeration",
+      "enum": [
+        "one",
+        "two",
+        "three",
+        "four",
+        "five",
+        "six"
+      ]
+    }
+  }
+}

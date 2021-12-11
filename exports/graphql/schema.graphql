@@ -326,6 +326,41 @@ type deleteGlobalPayload {
   global: Global
 }
 
+enum ENUM_ORDER_DATE {
+  dec11
+  dec12
+  dec13
+  dec14
+  dec15
+  dec16
+  dec17
+  dec18
+  dec19
+  dec20
+  dec21
+  dec22
+  dec23
+  dec24
+  dec25
+  dec26
+  dec27
+  dec28
+}
+
+enum ENUM_ORDER_TIME {
+  one
+  two
+  three
+  four
+  five
+  six
+}
+
+enum ENUM_ORDER_SESSION {
+  day
+  night
+}
+
 type Order {
   id: ID!
   created_at: DateTime!
@@ -336,6 +371,11 @@ type Order {
   paid: Boolean
   name: String
   phone: String
+  date: ENUM_ORDER_DATE
+  time: ENUM_ORDER_TIME
+  session: ENUM_ORDER_SESSION
+  spent: Boolean
+  checkin: String
   published_at: DateTime
 }
 
@@ -380,6 +420,11 @@ type OrderGroupBy {
   paid: [OrderConnectionPaid]
   name: [OrderConnectionName]
   phone: [OrderConnectionPhone]
+  date: [OrderConnectionDate]
+  time: [OrderConnectionTime]
+  session: [OrderConnectionSession]
+  spent: [OrderConnectionSpent]
+  checkin: [OrderConnectionCheckin]
   published_at: [OrderConnectionPublished_at]
 }
 
@@ -428,6 +473,31 @@ type OrderConnectionPhone {
   connection: OrderConnection
 }
 
+type OrderConnectionDate {
+  key: String
+  connection: OrderConnection
+}
+
+type OrderConnectionTime {
+  key: String
+  connection: OrderConnection
+}
+
+type OrderConnectionSession {
+  key: String
+  connection: OrderConnection
+}
+
+type OrderConnectionSpent {
+  key: Boolean
+  connection: OrderConnection
+}
+
+type OrderConnectionCheckin {
+  key: String
+  connection: OrderConnection
+}
+
 type OrderConnectionPublished_at {
   key: DateTime
   connection: OrderConnection
@@ -440,6 +510,11 @@ input OrderInput {
   paid: Boolean
   name: String
   phone: String
+  date: ENUM_ORDER_DATE
+  time: ENUM_ORDER_TIME
+  session: ENUM_ORDER_SESSION
+  spent: Boolean
+  checkin: String
   published_at: DateTime
   created_by: ID
   updated_by: ID
@@ -452,6 +527,11 @@ input editOrderInput {
   paid: Boolean
   name: String
   phone: String
+  date: ENUM_ORDER_DATE
+  time: ENUM_ORDER_TIME
+  session: ENUM_ORDER_SESSION
+  spent: Boolean
+  checkin: String
   published_at: DateTime
   created_by: ID
   updated_by: ID
@@ -480,6 +560,138 @@ input deleteOrderInput {
 
 type deleteOrderPayload {
   order: Order
+}
+
+enum ENUM_SLOT_SESSION {
+  day
+  night
+}
+
+enum ENUM_SLOT_TIMESLOT {
+  one
+  two
+  three
+  four
+  five
+  six
+}
+
+type Slot {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  title: String
+  date: Date
+  session: ENUM_SLOT_SESSION
+  timeslot: ENUM_SLOT_TIMESLOT
+  published_at: DateTime
+}
+
+type SlotConnection {
+  values: [Slot]
+  groupBy: SlotGroupBy
+  aggregate: SlotAggregator
+}
+
+type SlotAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type SlotGroupBy {
+  id: [SlotConnectionId]
+  created_at: [SlotConnectionCreated_at]
+  updated_at: [SlotConnectionUpdated_at]
+  title: [SlotConnectionTitle]
+  date: [SlotConnectionDate]
+  session: [SlotConnectionSession]
+  timeslot: [SlotConnectionTimeslot]
+  published_at: [SlotConnectionPublished_at]
+}
+
+type SlotConnectionId {
+  key: ID
+  connection: SlotConnection
+}
+
+type SlotConnectionCreated_at {
+  key: DateTime
+  connection: SlotConnection
+}
+
+type SlotConnectionUpdated_at {
+  key: DateTime
+  connection: SlotConnection
+}
+
+type SlotConnectionTitle {
+  key: String
+  connection: SlotConnection
+}
+
+type SlotConnectionDate {
+  key: ID
+  connection: SlotConnection
+}
+
+type SlotConnectionSession {
+  key: String
+  connection: SlotConnection
+}
+
+type SlotConnectionTimeslot {
+  key: String
+  connection: SlotConnection
+}
+
+type SlotConnectionPublished_at {
+  key: DateTime
+  connection: SlotConnection
+}
+
+input SlotInput {
+  title: String
+  date: Date
+  session: ENUM_SLOT_SESSION
+  timeslot: ENUM_SLOT_TIMESLOT
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editSlotInput {
+  title: String
+  date: Date
+  session: ENUM_SLOT_SESSION
+  timeslot: ENUM_SLOT_TIMESLOT
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createSlotInput {
+  data: SlotInput
+}
+
+type createSlotPayload {
+  slot: Slot
+}
+
+input updateSlotInput {
+  where: InputID
+  data: editSlotInput
+}
+
+type updateSlotPayload {
+  slot: Slot
+}
+
+input deleteSlotInput {
+  where: InputID
+}
+
+type deleteSlotPayload {
+  slot: Slot
 }
 
 enum ENUM_TICKET_SESSION {
@@ -1218,7 +1430,7 @@ input editComponentSingleImageInput {
   green: ID
 }
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | About | updateAboutPayload | deleteAboutPayload | Entry | EntryConnection | EntryAggregator | EntryAggregatorSum | EntryAggregatorAvg | EntryAggregatorMin | EntryAggregatorMax | EntryGroupBy | EntryConnectionId | EntryConnectionCreated_at | EntryConnectionUpdated_at | EntryConnectionTitle | EntryConnectionImage | EntryConnectionSlug | EntryConnectionToi | EntryConnectionPhat | EntryConnectionAuthorName | EntryConnectionAuthorBiography | EntryConnectionAuthorBirthyear | EntryConnectionAuthorEmail | EntryConnectionAuthorInstagram | EntryConnectionAuthorFacebook | EntryConnectionAuthorPhone | EntryConnectionPublished_at | createEntryPayload | updateEntryPayload | deleteEntryPayload | Global | updateGlobalPayload | deleteGlobalPayload | Order | OrderConnection | OrderAggregator | OrderAggregatorSum | OrderAggregatorAvg | OrderAggregatorMin | OrderAggregatorMax | OrderGroupBy | OrderConnectionId | OrderConnectionCreated_at | OrderConnectionUpdated_at | OrderConnectionUser | OrderConnectionAmount | OrderConnectionTicket | OrderConnectionPaid | OrderConnectionName | OrderConnectionPhone | OrderConnectionPublished_at | createOrderPayload | updateOrderPayload | deleteOrderPayload | Ticket | TicketConnection | TicketAggregator | TicketAggregatorSum | TicketAggregatorAvg | TicketAggregatorMin | TicketAggregatorMax | TicketGroupBy | TicketConnectionId | TicketConnectionCreated_at | TicketConnectionUpdated_at | TicketConnectionTitle | TicketConnectionSlug | TicketConnectionPrice | TicketConnectionImage | TicketConnectionDescription | TicketConnectionSession | TicketConnectionPrice_old | TicketConnectionPublished_at | createTicketPayload | updateTicketPayload | deleteTicketPayload | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionTicket | UsersPermissionsUserConnectionName | UsersPermissionsUserConnectionPhone | createUserPayload | updateUserPayload | deleteUserPayload | ComponentSingleAuthor | ComponentSingleImage
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | About | updateAboutPayload | deleteAboutPayload | Entry | EntryConnection | EntryAggregator | EntryAggregatorSum | EntryAggregatorAvg | EntryAggregatorMin | EntryAggregatorMax | EntryGroupBy | EntryConnectionId | EntryConnectionCreated_at | EntryConnectionUpdated_at | EntryConnectionTitle | EntryConnectionImage | EntryConnectionSlug | EntryConnectionToi | EntryConnectionPhat | EntryConnectionAuthorName | EntryConnectionAuthorBiography | EntryConnectionAuthorBirthyear | EntryConnectionAuthorEmail | EntryConnectionAuthorInstagram | EntryConnectionAuthorFacebook | EntryConnectionAuthorPhone | EntryConnectionPublished_at | createEntryPayload | updateEntryPayload | deleteEntryPayload | Global | updateGlobalPayload | deleteGlobalPayload | Order | OrderConnection | OrderAggregator | OrderAggregatorSum | OrderAggregatorAvg | OrderAggregatorMin | OrderAggregatorMax | OrderGroupBy | OrderConnectionId | OrderConnectionCreated_at | OrderConnectionUpdated_at | OrderConnectionUser | OrderConnectionAmount | OrderConnectionTicket | OrderConnectionPaid | OrderConnectionName | OrderConnectionPhone | OrderConnectionDate | OrderConnectionTime | OrderConnectionSession | OrderConnectionSpent | OrderConnectionCheckin | OrderConnectionPublished_at | createOrderPayload | updateOrderPayload | deleteOrderPayload | Slot | SlotConnection | SlotAggregator | SlotGroupBy | SlotConnectionId | SlotConnectionCreated_at | SlotConnectionUpdated_at | SlotConnectionTitle | SlotConnectionDate | SlotConnectionSession | SlotConnectionTimeslot | SlotConnectionPublished_at | createSlotPayload | updateSlotPayload | deleteSlotPayload | Ticket | TicketConnection | TicketAggregator | TicketAggregatorSum | TicketAggregatorAvg | TicketAggregatorMin | TicketAggregatorMax | TicketGroupBy | TicketConnectionId | TicketConnectionCreated_at | TicketConnectionUpdated_at | TicketConnectionTitle | TicketConnectionSlug | TicketConnectionPrice | TicketConnectionImage | TicketConnectionDescription | TicketConnectionSession | TicketConnectionPrice_old | TicketConnectionPublished_at | createTicketPayload | updateTicketPayload | deleteTicketPayload | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionTicket | UsersPermissionsUserConnectionName | UsersPermissionsUserConnectionPhone | createUserPayload | updateUserPayload | deleteUserPayload | ComponentSingleAuthor | ComponentSingleImage
 
 input InputID {
   id: ID!
@@ -1245,6 +1457,9 @@ type Query {
   order(id: ID!, publicationState: PublicationState): Order
   orders(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Order]
   ordersConnection(sort: String, limit: Int, start: Int, where: JSON): OrderConnection
+  slot(id: ID!, publicationState: PublicationState): Slot
+  slots(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Slot]
+  slotsConnection(sort: String, limit: Int, start: Int, where: JSON): SlotConnection
   ticket(id: ID!, publicationState: PublicationState): Ticket
   tickets(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Ticket]
   ticketsConnection(sort: String, limit: Int, start: Int, where: JSON): TicketConnection
@@ -1274,6 +1489,9 @@ type Mutation {
   createOrder(input: createOrderInput): createOrderPayload
   updateOrder(input: updateOrderInput): updateOrderPayload
   deleteOrder(input: deleteOrderInput): deleteOrderPayload
+  createSlot(input: createSlotInput): createSlotPayload
+  updateSlot(input: updateSlotInput): updateSlotPayload
+  deleteSlot(input: deleteSlotInput): deleteSlotPayload
   createTicket(input: createTicketInput): createTicketPayload
   updateTicket(input: updateTicketInput): updateTicketPayload
   deleteTicket(input: deleteTicketInput): deleteTicketPayload

@@ -33,6 +33,53 @@
     },
     "phone": {
       "type": "string"
+    },
+    "date": {
+      "type": "enumeration",
+      "enum": [
+        "dec11",
+        "dec12",
+        "dec13",
+        "dec14",
+        "dec15",
+        "dec16",
+        "dec17",
+        "dec18",
+        "dec19",
+        "dec20",
+        "dec21",
+        "dec22",
+        "dec23",
+        "dec24",
+        "dec25",
+        "dec26",
+        "dec27",
+        "dec28"
+      ]
+    },
+    "time": {
+      "type": "enumeration",
+      "enum": [
+        "one",
+        "two",
+        "three",
+        "four",
+        "five",
+        "six"
+      ]
+    },
+    "session": {
+      "type": "enumeration",
+      "enum": [
+        "day",
+        "night"
+      ]
+    },
+    "spent": {
+      "type": "boolean"
+    },
+    "checkin": {
+      "type": "string"
     }
   }
 }
