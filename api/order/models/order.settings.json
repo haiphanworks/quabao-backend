@@ -76,10 +76,19 @@
       ]
     },
     "spent": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     },
     "checkin": {
       "type": "string"
+    },
+    "upgrade": {
+      "type": "boolean",
+      "default": false
+    },
+    "change": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
